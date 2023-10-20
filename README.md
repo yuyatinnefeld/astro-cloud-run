@@ -37,6 +37,7 @@ PROJECT_ID="YOUR_PROJECT_ID"
 REPO_NAME="docker-repo"
 REGION="europe-west1"
 SERVICE_NAME="astra-service"
+IMAGE="astro-image"
 
 touch cloudbuild.yaml
 touch service.yaml
@@ -49,7 +50,7 @@ gcloud artifacts repositories create $REPO_NAME \
 
 # Push the image into the Artifact Registry and 
 gcloud builds submit --config=cloudbuild.yaml \
-  --substitutions=_PROJECT_ID=$PROJECT_ID,_LOCATION=$REGION,_REPOSITORY=$REPO_NAME,_IMAGE="astro-image" .
+  --substitutions=_PROJECT_ID=$PROJECT_ID,_LOCATION=$REGION,_REPOSITORY=$REPO_NAME,_IMAGE=$IMAGE .
 
 # Deploy the Cloud Run service
 gcloud run services replace service.yaml --region=europe-west1
